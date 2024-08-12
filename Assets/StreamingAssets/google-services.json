@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "474695181972",
+    "firebase_url": "https://dgameengine-d704d-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "dgameengine-d704d",
+    "storage_bucket": "dgameengine-d704d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474695181972:android:3f0f2e30211f0d65827681",
+        "android_client_info": {
+          "package_name": "com.tuongbt.GameEngine2D"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5ahj7CFRiVC07LoaAefqP1nhufZUAGYw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

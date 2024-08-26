@@ -14,6 +14,8 @@ public class PlayerFarmController : MonoBehaviour
     public TileBase tb_Grass;
     public TileBase tb_Flower;
 
+    public List<TileBase> lstTb_Pumpkin;
+
     private RecyclableInventoryManager recyclableInventoryManager;
 
     public TileMapManager tileMapManager;
@@ -56,8 +58,9 @@ public class PlayerFarmController : MonoBehaviour
             if (crrTileBase == null)
             {
                 Debug.Log("Trong hoa");
-                tm_Flower.SetTile(cellPos, tb_Flower);
-                tileMapManager.SetStateForTilemapDetail(cellPos.x, cellPos.y, TilemapState.Flower);
+                //tm_Flower.SetTile(cellPos, tb_Flower);
+                StartCoroutine(GrowPlant(cellPos, tm_Flower, lstTb_Pumpkin));
+                tileMapManager.SetStateForTilemapDetail(cellPos.x, cellPos.y, TilemapState.Pumpkin);
             }
         }
         if (Input.GetKeyDown(KeyCode.M))
@@ -66,20 +69,33 @@ public class PlayerFarmController : MonoBehaviour
             Debug.Log("cellPos:" + cellPos);
             TileBase crrTileBase = tm_Flower.GetTile(cellPos);
 
-            if (crrTileBase != null)
+            if (crrTileBase == lstTb_Pumpkin[4])
             {
                 tm_Grass.SetTile(cellPos, tb_Grass);
                 tm_Flower.SetTile(cellPos, null);
 
                 //Lay item va them vao tui do
-                InvenItems itemFlower = new InvenItems();
-                itemFlower.Name = "Hoa 1h";
-                itemFlower.description = "Hoa nay trang tri rat dep";
+                InvenItems itemPumpkin = new InvenItems();
+                itemPumpkin.Name = "Bi do";
+                itemPumpkin.description = "Bi do an rat ngon!";
 
-                Debug.Log(itemFlower.ToString());
+                Debug.Log(itemPumpkin.ToString());
 
-                recyclableInventoryManager.AddInventoryItem(itemFlower);
+                recyclableInventoryManager.AddInventoryItem(itemPumpkin);
+                tileMapManager.SetStateForTilemapDetail(cellPos.x, cellPos.y, TilemapState.Pumpkin);
             }
+        }
+    }
+
+    public IEnumerator GrowPlant(Vector3Int cellPos, Tilemap tilemap, List<TileBase> lstTilebase)
+    {
+        int crrStage = 0;
+
+        while(crrStage < lstTilebase.Count)
+        {
+            tilemap.SetTile(cellPos, lstTilebase[crrStage]);
+            yield return new WaitForSeconds(5);
+            crrStage++;
         }
     }
 }
